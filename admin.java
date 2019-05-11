@@ -11,6 +11,8 @@ public class admin
 {
     private  Connection con;
 
+    private String name;
+
     public  Connection getCon() {
         return con;
     }
@@ -19,8 +21,15 @@ public class admin
         this.con = con;
     }
 
+    public String getName() {
+        return name;
+    }
 
-   public void updateInfosEleve(int matricule,String field,String parametre) throws SQLException {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void updateInfosEleve(int matricule, String field, String parametre) throws SQLException {
        Statement querry = getCon().createStatement();
        ResultSet resultSet;
 
@@ -330,7 +339,7 @@ public class admin
 
     }
 
-    public void listCours() throws SQLException {
+    public int listCours(boolean forGroupe) throws SQLException {
         Statement querry = getCon().createStatement();
         ResultSet resultSet = querry.executeQuery("SELECT * from cours");
         int i = 1;
@@ -346,10 +355,14 @@ public class admin
         int choice = scanner.nextInt();
 
         if (choice == 0)
-            return;
+            return 0;
+        if (forGroupe == true){
+            return cours.get(choice-1);
+        }
         else
             coursInfos(cours.get(choice-1));
 
+        return 0;
     }
 
     private void coursInfos(int matricule) throws SQLException {
@@ -686,6 +699,21 @@ public class admin
     public void searchGroupe() throws SQLException {
         listEleves(false,false,true);
 
+
+    }
+
+    public void addEleve() throws SQLException {
+        Statement querry = getCon().createStatement();
+        ResultSet resultSet = querry.executeQuery("SELECT Matricule from eleve");
+        int id = 1;
+        while (resultSet.next()){
+            id++;
+        }
+        System.out.println("Inserer le code du groupe:");
+        int grpCode = new Scanner(System.in).nextInt();
+        System.out.println("Inserer la promotion:");
+        String prom = new Scanner(System.in).nextLine();
+        querry.executeUpdate("INSERT INTO eleve(Matricule, Id_Gen, Id_Coor, Id_Iden, Id_Grp, Id_Resp, mdp, Promotion) VALUES ('" + id +"','" + addGeneral() + "','" + addCoord() + "','"+ addIdenity() + "','" + grpCode + "','" + addResponsable() + "','" + null + "','"+ prom +"')");
 
     }
 

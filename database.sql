@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2019 at 08:03 PM
+-- Generation Time: May 11, 2019 at 03:18 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -63,7 +63,9 @@ INSERT INTO `coordonnees` (`ID`, `Rue`, `CodePostal`, `Ville`, `Email`, `Telepho
 (1, '1 Rue de Rome', '78990', 'Elancourt', 'radu@cernaianu.fr', 6789999),
 (2, '1', '55555', 'Massy', 'mathis@bicheyre.fr', 600000),
 (3, 'hey', '78999', 'Chatillon', 'maman@djedir.fr', 669),
-(5, 'Kremlin', '55', 'MOSCOW', 'bobo@velvel.fr', 55);
+(4, '1', '2', '3', '4', 5),
+(5, 'a', '1', 'a', 'b', 1),
+(6, 'a', '45', 'aaa', 'aaa', 555);
 
 -- --------------------------------------------------------
 
@@ -88,8 +90,7 @@ CREATE TABLE `cours` (
 --
 
 INSERT INTO `cours` (`Code`, `Nom`, `Description`, `Annee`, `Coefficient`, `Pourc_DE`, `Pourc_CE`, `Pourc_PRJ`, `Id_Prof`) VALUES
-(1, 'Maths', 'Graphs', 2019, 2, 50, 20, 30, 1),
-(2, 'Physique', 'Quantique', 2019, 1, 40, 30, 30, 1);
+(1, 'Maths', 'MPI', 2019, 2, 50, 20, 30, 1);
 
 -- --------------------------------------------------------
 
@@ -113,7 +114,8 @@ CREATE TABLE `eleve` (
 --
 
 INSERT INTO `eleve` (`Matricule`, `Id_Gen`, `Id_Coor`, `Id_Iden`, `Id_Grp`, `Id_Resp`, `MDP`, `Promotion`) VALUES
-(20160283, 1, 1, 1, 1, 1, 'mdp', 'L3'),
+(3, 4, 4, 3, 1, 2, 'null', 'L3'),
+(20160283, 1, 1, 1, 3, 1, 'mdp', 'L3'),
 (20160284, 2, 2, 2, 2, 1, 'aaa', 'L3');
 
 -- --------------------------------------------------------
@@ -135,8 +137,10 @@ CREATE TABLE `general` (
 INSERT INTO `general` (`ID`, `Nom`, `Prenom`) VALUES
 (1, 'Radu', 'Cernaianu'),
 (2, 'Bicheyre', 'Mathis'),
-(3, 'Djedir', 'Maman'),
-(5, 'Velikson', 'Boris');
+(3, 'Djedir', 'YAYA'),
+(4, 'Djedir', 'Warren'),
+(5, 'abc', 'def'),
+(6, 'Velikson', 'Boris');
 
 -- --------------------------------------------------------
 
@@ -155,7 +159,8 @@ CREATE TABLE `groupe` (
 
 INSERT INTO `groupe` (`ID`, `Nom`) VALUES
 (1, 'INT'),
-(2, '7');
+(2, '7'),
+(3, 'F');
 
 -- --------------------------------------------------------
 
@@ -196,7 +201,8 @@ CREATE TABLE `identite` (
 
 INSERT INTO `identite` (`ID`, `DOB`, `VilleNaissance`, `PaysNaissance`, `Sexe`, `Photo`) VALUES
 (1, '1998-09-08', 'Bucarest', 'Roumanie', 'M', NULL),
-(2, '1998-05-20', 'PAris', 'France', 'M', NULL);
+(2, '1998-05-20', 'PAris', 'France', 'M', NULL),
+(3, '1998-05-05', 'j', 'k', 'M', NULL);
 
 -- --------------------------------------------------------
 
@@ -217,8 +223,7 @@ CREATE TABLE `notes` (
 --
 
 INSERT INTO `notes` (`Matricule`, `Code`, `Note_DE`, `Note_CE`, `Note_PRJ`) VALUES
-(20160283, 1, 5, 15, 18),
-(20160283, 2, 12, 12, 12);
+(20160283, 1, 12, 15, NULL);
 
 -- --------------------------------------------------------
 
@@ -237,7 +242,8 @@ CREATE TABLE `persresponsable` (
 --
 
 INSERT INTO `persresponsable` (`ID`, `Id_Gen`, `Id_Coor`) VALUES
-(1, 3, 3);
+(1, 3, 3),
+(2, 5, 5);
 
 -- --------------------------------------------------------
 
@@ -258,7 +264,7 @@ CREATE TABLE `professeur` (
 --
 
 INSERT INTO `professeur` (`Matricule`, `Id_Gen`, `Id_Coor`, `Id_Iden`, `MDP`) VALUES
-(1, 5, 5, 1, NULL);
+(1, 6, 6, 1, 'mdp');
 
 --
 -- Indexes for dumped tables
@@ -345,13 +351,13 @@ ALTER TABLE `professeur`
 -- AUTO_INCREMENT for table `coordonnees`
 --
 ALTER TABLE `coordonnees`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `cours`
 --
 ALTER TABLE `cours`
-  MODIFY `Code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `eleve`
@@ -363,25 +369,25 @@ ALTER TABLE `eleve`
 -- AUTO_INCREMENT for table `general`
 --
 ALTER TABLE `general`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `groupe`
 --
 ALTER TABLE `groupe`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `identite`
 --
 ALTER TABLE `identite`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `persresponsable`
 --
 ALTER TABLE `persresponsable`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `professeur`

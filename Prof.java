@@ -113,20 +113,20 @@ public class Prof {
 
     }
 
-    public void updateNote(int matricule, int code_cours) throws SQLException{
+    public void updateNote() throws SQLException{
         Statement querry = getCon().createStatement();
-        System.out.println("Rentrer les notes à changer avec le type avant:");
+        System.out.println("Rentrer la matricule de l'éleve, le code du cours et la note avec le type avant:");
         String line = new Scanner(System.in).nextLine();
         String data[] = line.split(" ");
-        ;
-        if (data[0].compareTo("DE") == 0){
-            querry.executeUpdate("UPDATE notes SET Note_DE='" + data[1] +"' where Matricule="+matricule+" and code="+code_cours );
+
+        if (data[2].compareTo("DE") == 0){
+            querry.executeUpdate("UPDATE notes SET Note_DE='" + data[3] +"' where Matricule="+data[0]+" and code="+data[1] );
         }
-        if (data[0].compareTo("TP") == 0){
-            querry.executeUpdate("UPDATE notes SET Note_CE='" + data[1] +"' where Matricule='"+matricule+"' and code='"+code_cours+"'" );
+        if (data[2].compareTo("TP") == 0){
+            querry.executeUpdate("UPDATE notes SET Note_CE='" + data[3] +"' where Matricule='"+data[0]+"' and code='"+data[1]+"'" );
         }
-        if (data[0].compareTo("PRJ") == 0){
-            querry.executeUpdate("UPDATE notes SET Note_PRJ='" + data[1] +"' where Matricule='"+matricule+"' and code='"+code_cours+"'" );
+        if (data[2].compareTo("PRJ") == 0){
+            querry.executeUpdate("UPDATE notes SET Note_PRJ='" + data[3] +"' where Matricule='"+data[0]+"' and code='"+data[1]+"'" );
         }
 
 
