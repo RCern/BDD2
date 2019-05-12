@@ -120,7 +120,7 @@ public class admin
         ResultSet resultSet;
 
         switch (field){
-            /* "INNER Join persresponsable AS PR on E.Id_Resp = PR.ID  "*/
+
             case "nom":
                 resultSet = querry.executeQuery("SELECT PR.Id_Gen from eleve as E INNER Join persresponsable AS PR on E.Id_Resp = PR.ID INNER JOIN general AS G on G.ID = PR.ID_Gen WHERE E.Matricule="+matricule);
                 resultSet.next();
@@ -564,15 +564,6 @@ public class admin
             System.out.println(i+") ID: " + resultSet.getInt(1) + " Nom: " + resultSet.getString(2));
             i++;
         }
-
-        System.out.println("Selectionner un groupr en ecrivant son numéro ('1)')\n Pour revenir inserer 0.");
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-
-        if (choice == 0)
-            return;
-        else
-            coursInfos(cours.get(choice-1));
 
 
     }

@@ -86,6 +86,17 @@ public class Prof {
 
         ResultSet resultSet = querry.executeQuery("SELECT Matricule, Code from notes where Matricule='"+data[0]+"' and Code='"+data[1]+"'");
 
+        boolean temp = false;
+
+        while(resultSet.next()){
+            for (int i =0; i < codesCours.size();i++){
+                if (resultSet.getInt(2)== codesCours.get(i))
+                    temp = true;
+            }
+
+        }
+        resultSet.beforeFirst();
+        if (temp){
         if (resultSet.next()) {
             if (data[2].compareTo("DE") == 0) {
                 querry.executeUpdate("UPDATE notes SET Note_DE='" + data[3] + "' where Matricule=" + data[0] + " and code=" + data[1]);
@@ -109,6 +120,8 @@ public class Prof {
             }
 
         }
+        }
+        else System.out.println("Erreur, le code du cours est faux.");
 
 
     }
@@ -118,6 +131,8 @@ public class Prof {
         System.out.println("Rentrer la matricule de l'éleve, le code du cours et la note avec le type avant:");
         String line = new Scanner(System.in).nextLine();
         String data[] = line.split(" ");
+
+
 
         if (data[2].compareTo("DE") == 0){
             querry.executeUpdate("UPDATE notes SET Note_DE='" + data[3] +"' where Matricule="+data[0]+" and code="+data[1] );
